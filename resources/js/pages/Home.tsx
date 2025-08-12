@@ -1,16 +1,11 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 
-export default function Home(){
-
-    return(
+export default function Home() {
+    return (
         <>
+            <Head title="Home" />
 
-            <Head title='Home' />
-
-            <h1>
-                Home
-            </h1>
+            <h1>Home</h1>
         </>
     );
-
 }
