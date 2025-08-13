@@ -8,7 +8,16 @@ class Maincontroller extends Controller
 {
     public function authLogin(Request $request){
 
-        return $request->input('email');
+        $request->validate([
+            "email" => "required|email",
+            "password" => "required"
+        ], [
+            "email.required" => "Email não preenchido",
+            "email.email" => "Email inválido",
+            "password.required" => "Senha não foi preenchida"
+        ]);
+
+        return "OK";
 
     }
 }

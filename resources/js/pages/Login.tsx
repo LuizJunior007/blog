@@ -1,28 +1,31 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function Login() {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
 
-    const handleLogin = async (e) => {
+    const { errors } = usePage().props;
+
+    const [ values, setValues ] = useState({
+        email: '',
+        password: ''
+    });
+
+    function handleChange(e: { target: { id: any; value: any; }; }) {
+        
+        const key = e.target.id;
+        const value = e.target.value
+        setValues(values => ({
+            ...values,
+            [key]: value,
+        }))
+    }
+
+    function handleSubmit(e: { preventDefault: () => void; }){
+
         e.preventDefault();
 
-        const formData = {
-            email: email,
-            password: password,
-        };
-
-        const res = await fetch('http://localhost:8000/api/authLogin', {
-            method: 'post',
-            headers: {
-                'Content-type': 'application/json',
-            },
-        });
-
-        const data = await res.json();
-        console.log(data);
-    };
+        router.post('/authLogin', values);
+    }
 
     return (
         <>
@@ -31,21 +34,27 @@ export default function Login() {
                 <meta name="description" content="Faça login para ter acesso a todo o conteúdo do blog" />
             </Head>
 
-            <section className="d-flex justify-content-center">
+            <section className="d-flex flex-column align-items-center justify-content-center">
                 <div className="login-form">
-                    <div className="mb-3">
+                    <div className="mb-4 text-center">
                         <h1>Login</h1>
                     </div>
 
-                    <form>
-                        <div className="form-floating mb-3">
-                            <input type="email" name="email" className="form-control" id="email" placeholder="name@example.com" />
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-floating mb-4">
+                            <input type="text" value={values.email} className="form-control" onChange={handleChange} id="email" placeholder="name@example.com" />
                             <label htmlFor="email">Email</label>
+                            {
+                                errors.email && <small className='text-danger'>{errors.email}</small>
+                            }
                         </div>
 
-                        <div className="form-floating mb-3">
-                            <input type="password" name="password" className="form-control" id="password" placeholder="Senha" />
+                        <div className="form-floating mb-4">
+                            <input type="password" value={values.password} name="password" onChange={handleChange} className="form-control" id="password" placeholder="Senha" />
                             <label htmlFor="password">Senha</label>
+                            {
+                                errors.password && <small className='text-danger'>{errors.password}</small>
+                            }
                         </div>
 
                         <div>
@@ -54,6 +63,10 @@ export default function Login() {
                             </button>
                         </div>
                     </form>
+                </div>
+
+                <div className='mt-4 fw-medium' style={{fontSize: "1.1em"}}>
+                    Ainda não tem uma conta? <Link href="/">Cadastre-se</Link>
                 </div>
             </section>
         </>

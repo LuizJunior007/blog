@@ -12,3 +12,5 @@ Route::get('/login', function(){
     return Inertia::render('Login');
 })->name('login');
 
+Route::post('/authLogin', [Maincontroller::class, 'authLogin'])->name('authLogin');
+
