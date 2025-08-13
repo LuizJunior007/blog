@@ -65,8 +65,8 @@ export default function Login() {
                     </form>
                 </div>
 
-                <div className='mt-4 fw-medium' style={{fontSize: "1.1em"}}>
-                    Ainda não tem uma conta? <Link href="/">Cadastre-se</Link>
+                <div className='mt-4 fw-medium'>
+                    Ainda não tem uma conta? <Link href="/signup">Cadastre-se</Link>
                 </div>
             </section>
         </>

@@ -14,3 +14,9 @@ Route::get('/login', function(){
 
 Route::post('/authLogin', [Maincontroller::class, 'authLogin'])->name('authLogin');
 
+Route::get('/signup', function(){
+    return Inertia::render('Signup');
+})->name('signup');
+
+Route::post('/signup', [Maincontroller::class, 'signup'])->name('signup.cadastrar');
+

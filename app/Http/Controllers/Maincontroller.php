@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class Maincontroller extends Controller
 {
@@ -19,5 +21,34 @@ class Maincontroller extends Controller
 
         return "OK";
 
+    }
+
+    public function signup(Request $request){
+
+        $request->validate([
+            'name' => 'required|min:3',
+            'lastname' => 'required|min:3',
+            "email" => "required|email|unique:users,email",
+            "password" => "required|min:6"
+        ], [
+            'name.required' => 'Nome não foi preenchido',
+            'lastname.required' => 'Sobrenome não foi preenchido',
+            'name.min' => 'Mínimo 3 caracters',
+            'lastname.min' => 'Mínimo 3 caracters',
+            "email.required" => "Email não preenchido",
+            "email.email" => "Email inválido",
+            'email.unique' => 'Email já está em uso',
+            "password.required" => "Senha não foi preenchida",
+            'password.min' => 'Mínimo 6 caracters'
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return to_route('signup');
     }
 }
