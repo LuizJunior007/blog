@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class Maincontroller extends Controller
@@ -19,8 +20,20 @@ class Maincontroller extends Controller
             "password.required" => "Senha não foi preenchida"
         ]);
 
-        return "OK";
+        if(Auth::attempt([
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'is_admin' => 1
+        ])){
 
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email ou senha inválidos',
+        ])->onlyInput('email');
     }
 
     public function signup(Request $request){

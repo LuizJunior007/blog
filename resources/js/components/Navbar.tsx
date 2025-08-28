@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 
 export default function Navbar() {
+
     return (
         <header>
             <nav className="navbar navbar-expand-lg bg-dark navbar-dark">

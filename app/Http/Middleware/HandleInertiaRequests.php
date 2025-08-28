@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'routeName' => optional($request->route()->getName())
         ];
     }
 }

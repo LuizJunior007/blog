@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Maincontroller;
+use App\Http\Middleware\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,4 +20,9 @@ Route::get('/signup', function(){
 })->name('signup');
 
 Route::post('/signup', [Maincontroller::class, 'signup'])->name('signup.cadastrar');
+Route::get('/dashboard',function(){
+
+    return Inertia::render('Dashboard');
+    
+})->middleware(Auth::class);
 
