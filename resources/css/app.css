@@ -17,6 +17,57 @@ h1{
     font-size: 2em;
 }
 
+.offcanvas{
+    top: 3.5rem !important;
+    width: 18rem !important;
+}
+
+.main-admin{
+    margin-left: 18rem;
+    height: 100%;
+}
+
+.logo{
+    color: #f9f9f9 !important;
+}
+
+.sidebar{
+    position: fixed;
+    width: 18rem !important;
+    top: 3.5rem;
+    height: 100%;
+    background-color: #fff;
+    transition: all 0.2s ease-in;
+}
+
+.navbar-admin{
+    color: #f9f9f9;
+    background-color: #202020;
+}
+
+#btnToggleSideBar{
+    display: none;
+}
+
+.sidebar.show{
+    margin-left: 0;
+}
+
+@media(max-width: 768px){
+    #btnToggleSideBar{
+        display: block;
+    }
+
+    .sidebar{
+        margin-left: -300px;
+        position: fixed !important;
+    }
+
+    .main-admin{
+        margin-left: 0;
+    }
+}
+
 @media(max-width: 360px){
     .login-form{
         width: 100%;

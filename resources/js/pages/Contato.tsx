@@ -5,7 +5,6 @@ export default function Contato(){
     return(
 
         <>
-
             <Head>
                 <title>Contato</title>
                 <meta name="description" content="Olá mundo" />

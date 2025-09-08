@@ -17,7 +17,7 @@ class Auth
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(!FacadesAuth::check()){
+        if(!FacadesAuth::check() || !FacadesAuth::user()->is_admin){
 
             return redirect('/');
 

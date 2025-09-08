@@ -24,5 +24,6 @@ Route::get('/dashboard',function(){
 
     return Inertia::render('Dashboard');
     
-})->middleware(Auth::class);
+})->name('dashboard')->middleware(Auth::class);
+Route::get('/logout', [Maincontroller::class, 'logout']);
 

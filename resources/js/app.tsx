@@ -11,17 +11,20 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
-    resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx')),
+    resolve: (name) => {
+        const pages = import.meta.glob('./pages/**/*.tsx', { eager: true });
+        let page: any = pages[`./pages/${name}.tsx`];
+        
+        page.default.layout ??= (page: any) => page;
+
+        return page;
+    },
     setup({ el, App, props }) {
         const root = createRoot(el);
 
-        root.render(
-            <Layout>
-                <App {...props} />
-            </Layout>,
-        );
+        root.render(<App {...props} />);
     },
     progress: {
-        color: '#4B5563',
+        color: '#3366afff',
     },
 });

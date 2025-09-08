@@ -29,6 +29,15 @@ class Maincontroller extends Controller
             $request->session()->regenerate();
 
             return redirect()->intended('dashboard');
+
+        } else if(Auth::attempt([
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'is_admin' => 0
+        ])){
+
+            $request->session()->regenerate();
+            return redirect('/');
         }
 
         return back()->withErrors([
@@ -63,5 +72,14 @@ class Maincontroller extends Controller
         ]);
 
         return to_route('signup');
+    }
+
+    public function logout(Request $request){
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
