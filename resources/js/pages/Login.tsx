@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 export default function Login() {
 
@@ -74,4 +74,4 @@ export default function Login() {
     );
 }
 
-Login.layout = (page: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined) => <Layout>{page}</Layout>
+Login.layout = (page: ReactNode) => <Layout>{page}</Layout>

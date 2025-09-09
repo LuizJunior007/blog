@@ -1,6 +1,6 @@
 import AdminLayout from "@/components/AdminLayout";
 import { Head } from "@inertiajs/react";
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+import { ReactNode } from "react";
 
 export default function Dashboard(){
 
@@ -12,12 +12,16 @@ export default function Dashboard(){
                 <meta name="description" content="Minha dashboard" />
             </Head>
 
-            <div>
-                Dashboard
-            </div>
+            <section>
+                <h1>Dashboard</h1>
+
+                <div>
+                    Content...
+                </div>
+            </section>
         </>
     );
 
 }
 
-Dashboard.layout = (page: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined) => <AdminLayout>{page}</AdminLayout>
+Dashboard.layout = (page: ReactNode) => <AdminLayout>{page}</AdminLayout>

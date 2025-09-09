@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
+
+use function Termwind\render;
 
 class Maincontroller extends Controller
 {
@@ -72,6 +75,16 @@ class Maincontroller extends Controller
         ]);
 
         return to_route('signup');
+    }
+
+    public function users(){
+
+        $users = User::latest()->get();
+
+        return Inertia::render('Users', [
+            'users' => $users
+        ]);
+
     }
 
     public function logout(Request $request){

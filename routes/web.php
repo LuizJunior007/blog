@@ -27,3 +27,4 @@ Route::get('/dashboard',function(){
 })->name('dashboard')->middleware(Auth::class);
 Route::get('/logout', [Maincontroller::class, 'logout']);
 
+Route::get('/usuarios', [Maincontroller::class, 'users'])->name('usuarios')->middleware(Auth::class);

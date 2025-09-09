@@ -23,7 +23,7 @@ h1{
 }
 
 .main-admin{
-    margin-left: 18rem;
+    margin-left: 16rem;
     height: 100%;
 }
 
@@ -33,11 +33,21 @@ h1{
 
 .sidebar{
     position: fixed;
-    width: 18rem !important;
+    width: 16rem !important;
     top: 3.5rem;
     height: 100%;
-    background-color: #fff;
+    background-color: #202020;
     transition: all 0.2s ease-in;
+}
+
+.sidebar .nav-item .nav-link{
+    color: #808080;
+    border-bottom: 1px solid #303030;
+    padding: 15px 12px;
+}
+
+.sidebar .nav-item .nav-link:hover{
+    color: #f9f9f9;
 }
 
 .navbar-admin{

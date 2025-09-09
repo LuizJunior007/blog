@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout';
 import { Head, usePage } from '@inertiajs/react';
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
+import { ReactNode } from 'react';
 
 export default function Home() {
 
@@ -20,4 +20,4 @@ export default function Home() {
     );
 }
 
-Home.layout = (page: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined) => <Layout>{page}</Layout>
+Home.layout = (page: ReactNode) => <Layout>{page}</Layout>

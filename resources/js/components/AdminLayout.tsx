@@ -7,7 +7,7 @@ export default function AdminLayout({children}: LayoutProps){
         <>
             <Sidebar />
 
-            <div className="main-admin p-3">
+            <div className="main-admin p-4">
                 {children}
             </div>
         </>

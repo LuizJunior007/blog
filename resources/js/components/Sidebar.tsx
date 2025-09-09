@@ -10,7 +10,6 @@ export default function Sidebar(){
 
     return(
         <>
-
             <header className="sticky-top">
                 <nav className="navbar navbar-admin navbar-expand-md">
                     <div className="container-fluid">
@@ -30,8 +29,13 @@ export default function Sidebar(){
                     <nav>
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link href="/logout" className="nav-link">
+                                <Link href="/dashboard" className="nav-link">
                                     Dashboard
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link href="/usuarios" className="nav-link">
+                                    Usuários
                                 </Link>
                             </li>
                             <li className="nav-item">
