@@ -34,6 +34,16 @@ export default function Sidebar(){
                                 </Link>
                             </li>
                             <li className="nav-item">
+                                <Link href="/posts" className="nav-link">
+                                    Posts
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link href="/categorias" className="nav-link">
+                                    Categorias
+                                </Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link href="/usuarios" className="nav-link">
                                     Usuários
                                 </Link>

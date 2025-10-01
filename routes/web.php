@@ -28,3 +28,6 @@ Route::get('/dashboard',function(){
 Route::get('/logout', [Maincontroller::class, 'logout']);
 
 Route::get('/usuarios', [Maincontroller::class, 'users'])->name('usuarios')->middleware(Auth::class);
+
+Route::get('/user/{id}', [Maincontroller::class, 'getUser'])->name('getUser');
+Route::put('/user/{id}', [Maincontroller::class, 'editUser'])->name('editUser');

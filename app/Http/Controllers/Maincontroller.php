@@ -6,9 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
-
-use function Termwind\render;
 
 class Maincontroller extends Controller
 {
@@ -79,12 +78,57 @@ class Maincontroller extends Controller
 
     public function users(){
 
-        $users = User::latest()->get();
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
 
         return Inertia::render('Users', [
             'users' => $users
         ]);
 
+    }
+
+    public function getUser($id){
+
+        $user = User::findOrFail($id);
+
+        return response()->json($user);
+
+    }
+
+    public function editUser(Request $request){
+
+        $request->validate([
+            'name' => 'required|min:3',
+            'lastname' => 'required|min:3',
+            "email" => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($request->id)
+            ],
+            'is_admin' => 'required'
+        ], [
+            'name.required' => 'Nome não foi preenchido',
+            'lastname.required' => 'Sobrenome não foi preenchido',
+            'name.min' => 'Mínimo 3 caracters',
+            'lastname.min' => 'Mínimo 3 caracters',
+            "email.required" => "Email não preenchido",
+            "email.email" => "Email inválido",
+            'email.unique' => 'Email já está em uso',
+            'is_admin.required' => 'Preencha esse campo'
+        ]);
+
+        $user = User::find($request->id);
+
+        $user->update([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'is_admin' => $request->is_admin,
+            'updated_at' => date('Y-m-d H:i:s')
+        ]); 
+
+        session('success', 'Teste');
+
+        return redirect()->back()->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function logout(Request $request){

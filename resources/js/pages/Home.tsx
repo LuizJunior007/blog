@@ -6,8 +6,6 @@ export default function Home() {
 
     const { props } = usePage();
 
-    console.log(props);
-
     return (
         <>
             <Head title="Home" />
