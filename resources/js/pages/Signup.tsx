@@ -110,7 +110,7 @@ export default function Signup(){
                         </div>
 
                         <div className="form-floating mb-4">
-                            <input type="password" value={values.password} name="password" onChange={handleChange} className="form-control" id="password" placeholder="Senha" />
+                            <input type="password" value={values.password} name="password" onChange={handleChange} className="form-control" id="password" placeholder="Senha" autoComplete='off' />
                             <label htmlFor="password">Senha</label>
                             {
                                 errors.password && <small className='text-danger'>{errors.password}</small>

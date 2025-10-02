@@ -73,7 +73,15 @@ class Maincontroller extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return to_route('signup');
+        if($user){
+
+            return redirect()->back()->with('success', 'Cadastro realizado com sucesso');
+        } else{
+
+            return redirect()->back()->with('error', 'Erro ao tentar realizar cadastro');
+        }
+
+        
     }
 
     public function users(){
@@ -126,9 +134,28 @@ class Maincontroller extends Controller
             'updated_at' => date('Y-m-d H:i:s')
         ]); 
 
-        session('success', 'Teste');
-
         return redirect()->back()->with('success', 'Usuário atualizado com sucesso!');
+    }
+
+    public function deleteUser(Request $request){
+
+        $user = User::findOrFail($request->id);
+
+        if($user->delete()){
+
+            return redirect()->back()->with('success', 'Usuário removido com sucesso');
+
+        } else{
+
+            return redirect()->back()->with('error', 'Erro ao tentar remover usuário');
+        }
+
+    }
+
+    public function categorias(){
+
+        return Inertia::render('Categories');
+
     }
 
     public function logout(Request $request){

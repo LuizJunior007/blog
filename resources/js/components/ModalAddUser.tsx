@@ -1,19 +1,13 @@
-import { UserProps } from "@/types";
 import { useForm } from "@inertiajs/react";
 import { useEffect } from "react";
 
-export type User = {
-    user?: UserProps;
-}
+export default function ModalAddUser(){
 
-export default function ModalEditUser({ user }: User){
-    
-    const { data, setData, errors, reset, clearErrors, put } = useForm({
-        id: 0,
+    const { data, setData, errors, clearErrors, post, reset } = useForm({
         name: '',
         lastname: '',
         email: '',
-        is_admin: 0 
+        password: '' 
     });
 
     const handleChange = (e: { target: { id: any; value: any; }; }) => {
@@ -26,14 +20,14 @@ export default function ModalEditUser({ user }: User){
 
         e.preventDefault();
 
-        put(`/user/${data.id}`, {
+        post(`/signup`, {
             onSuccess: () => {
 
                 if (document.activeElement instanceof HTMLElement) {
                     document.activeElement.blur();
                 }
 
-                const btn = document.getElementById('btnClose');
+                const btn = document.getElementById('btnClose3');
                 if (btn) {
                     
                     btn.click();
@@ -51,30 +45,22 @@ export default function ModalEditUser({ user }: User){
             document.activeElement.blur();
         }
 
-        reset();
+        setData({
+            name: '',
+            lastname: '',
+            email: '',
+            password: ''
+        });
+
         clearErrors();
     }
 
-    useEffect(() => {
-
-        if(user){
-            setData({
-                id: user.id,
-                name: user?.name,
-                lastname: user.lastname,
-                email: user.email,
-                is_admin: user.is_admin
-            });
-        }
-
-    }, [user]);
-
     return(
-        <div className="modal fade" id="modalEditUser" aria-labelledby="editLabel" aria-hidden="true">
+        <div className="modal fade" id="modalAddUser" aria-labelledby="addLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="editLabel">Editar usuário</h1>
+                        <h1 className="modal-title fs-5" id="addLabel">Adicionar usuário</h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -84,8 +70,8 @@ export default function ModalEditUser({ user }: User){
                             <div className="row">
                                 <div className="col-lg-6">
                                     <div className="form-floating mb-4">
-                                        <input type="text" value={data.name} className="form-control" onChange={handleChange} id="Ename" placeholder="Nome" />
-                                        <label htmlFor="Ename">Nome</label>
+                                        <input type="text" value={data.name} className="form-control" onChange={handleChange} id="name" placeholder="Nome" />
+                                        <label htmlFor="name">Nome</label>
                                         {
                                             errors.name && <small className='text-danger'>{errors.name}</small>
                                         }
@@ -94,8 +80,8 @@ export default function ModalEditUser({ user }: User){
 
                                 <div className="col-lg-6">
                                     <div className="form-floating mb-4">
-                                        <input type="text" value={data.lastname} className="form-control" onChange={handleChange} id="Elastname" placeholder="Nome" />
-                                        <label htmlFor="Elastname">Sobrenome</label>
+                                        <input type="text" value={data.lastname} className="form-control" onChange={handleChange} id="lastname" placeholder="Nome" />
+                                        <label htmlFor="lastname">Sobrenome</label>
                                         {
                                             errors.lastname && <small className='text-danger'>{errors.lastname}</small>
                                         }
@@ -106,8 +92,8 @@ export default function ModalEditUser({ user }: User){
                             <div className="row">
                                 <div className="col-lg-8">
                                     <div className="form-floating mb-4">
-                                        <input type="text" value={data.email} className="form-control" onChange={handleChange} id="Eemail" placeholder="Email" />
-                                        <label htmlFor="Eemail">Email</label>
+                                        <input type="text" value={data.email} className="form-control" onChange={handleChange} id="email" placeholder="Email" />
+                                        <label htmlFor="email">Email</label>
                                         {
                                             errors.email && <small className='text-danger p-2'>{errors.email}</small>
                                         }
@@ -116,10 +102,10 @@ export default function ModalEditUser({ user }: User){
 
                                 <div className="col-lg-4">
                                     <div className="form-floating mb-4">
-                                        <input type="text" value={data.is_admin} className="form-control" onChange={handleChange} id="Eis_admin" placeholder="Acesso" />
-                                        <label htmlFor="Eis_admin">Acesso</label>
+                                        <input type="password" value={data.password} className="form-control" onChange={handleChange} id="password" placeholder="Acesso" />
+                                        <label htmlFor="password">Senha</label>
                                         {
-                                            errors.is_admin && <small className='text-danger'>{errors.is_admin}</small>
+                                            errors.password && <small className='text-danger'>{errors.password}</small>
                                         }
                                     </div> 
                                 </div>
@@ -128,8 +114,8 @@ export default function ModalEditUser({ user }: User){
                     </div>
 
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeModal} id="btnClose">Fechar</button>
-                        <button type="button" className="btn btn-primary" onClick={handleSubmit}>Salvar</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeModal} id="btnClose3">Fechar</button>
+                        <button type="button" className="btn btn-primary" onClick={handleSubmit}>Adicionar</button>
                     </div>
                 </div>
             </div>

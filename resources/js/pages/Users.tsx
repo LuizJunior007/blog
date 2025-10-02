@@ -1,11 +1,13 @@
 import AdminLayout from "@/components/AdminLayout";
+import ModalAddUser from "@/components/ModalAddUser";
 import ModalEditUser from "@/components/ModalEditUser";
+import ModalRemoveUser from "@/components/ModalRemoveUser";
 import Pagination from "@/components/Pagination";
-import Toast from "@/components/Toast";
 import { formartDate } from "@/lib/utils";
-import { PaginatedResponse, User, UserProps } from "@/types";
+import { PaginatedResponse, UserProps } from "@/types";
 import { Head, usePage } from "@inertiajs/react";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function Users(){
@@ -37,6 +39,18 @@ export default function Users(){
         
     }
 
+    useEffect(() => {
+
+        if(flash.success){
+            toast.success(flash.success)
+        }
+
+        if(flash.error){
+            toast.error(flash.error);
+        }
+
+    }, [flash]);
+
     return(
         <>
             <Head>
@@ -45,7 +59,17 @@ export default function Users(){
             </Head>
 
             <section>
-                <h1>Usuários</h1>
+                <div className="row">
+                    <div className="col-6">
+                        <h1>Usuários</h1>
+                    </div>
+
+                    <div className="col-6 text-end">
+                        <button type="button" className="btn btn-primary" data-bs-target="#modalAddUser" data-bs-toggle="modal">
+                            <i className="bi bi-plus-lg"></i>
+                        </button>
+                    </div>
+                </div>
 
                 <div className="table-responsive p-3 border rounded bg-white shadow mt-3">
                     <table className="table table-striped align-middle">
@@ -82,13 +106,17 @@ export default function Users(){
                                             }
                                         </td>
                                         <td>{formartDate(u.created_at)}</td>
-                                        <td>{formartDate(u.updated_at)}</td>
+                                        <td>
+                                            {
+                                                u.updated_at === null ? '' : formartDate(u.updated_at)
+                                            }
+                                        </td>
                                         <td>
                                             <button type="button" onClick={() => getUser(u.id)} className="btn" title="Editar" data-bs-target="#modalEditUser" data-bs-toggle="modal">
                                                 <i className="bi bi-pen text-primary"></i>
                                             </button>
 
-                                            <button type="button" className="btn" title="Remover">
+                                            <button type="button" onClick={() => getUser(u.id)} className="btn" title="Remover" data-bs-target="#modalRemoveUser" data-bs-toggle="modal">
                                                 <i className="bi bi-trash text-danger"></i>
                                             </button>
                                         </td>
@@ -106,8 +134,15 @@ export default function Users(){
                 <Pagination links={ users.links } />
             </section>
 
-            {flash.success ? <Toast msg={ flash.success } /> : ''}
+            {
+                flash.success 
+                    &&
+                <ToastContainer />
+            }   
+
+            <ModalAddUser />
             <ModalEditUser user={user} />
+            <ModalRemoveUser user={user} />
         </>
     );
 

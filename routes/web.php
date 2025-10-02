@@ -31,3 +31,5 @@ Route::get('/usuarios', [Maincontroller::class, 'users'])->name('usuarios')->mid
 
 Route::get('/user/{id}', [Maincontroller::class, 'getUser'])->name('getUser');
 Route::put('/user/{id}', [Maincontroller::class, 'editUser'])->name('editUser');
+Route::delete('/user/{id}', [ Maincontroller::class, 'deleteUser' ])->name('deleteUser');
+Route::get('/categorias', [ Maincontroller::class, 'categorias' ])->name('categorias')->middleware(Auth::class);
