@@ -16,9 +16,9 @@ export default function ModalEditUser({ user }: User){
         is_admin: 0 
     });
 
-    const handleChange = (e: { target: { id: any; value: any; }; }) => {
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
 
-        setData(e.target.id, e.target.value);
+        setData(e.target.name, e.target.value);
 
     }
 
@@ -84,7 +84,7 @@ export default function ModalEditUser({ user }: User){
                             <div className="row">
                                 <div className="col-lg-6">
                                     <div className="form-floating mb-4">
-                                        <input type="text" value={data.name} className="form-control" onChange={handleChange} id="Ename" placeholder="Nome" />
+                                        <input type="text" value={data.name} className="form-control" name="name" onChange={handleChange} id="Ename" placeholder="Nome" />
                                         <label htmlFor="Ename">Nome</label>
                                         {
                                             errors.name && <small className='text-danger'>{errors.name}</small>
@@ -94,7 +94,7 @@ export default function ModalEditUser({ user }: User){
 
                                 <div className="col-lg-6">
                                     <div className="form-floating mb-4">
-                                        <input type="text" value={data.lastname} className="form-control" onChange={handleChange} id="Elastname" placeholder="Nome" />
+                                        <input type="text" value={data.lastname} className="form-control" name="lastname" onChange={handleChange} id="Elastname" placeholder="Nome" />
                                         <label htmlFor="Elastname">Sobrenome</label>
                                         {
                                             errors.lastname && <small className='text-danger'>{errors.lastname}</small>
@@ -105,8 +105,8 @@ export default function ModalEditUser({ user }: User){
 
                             <div className="row">
                                 <div className="col-lg-8">
-                                    <div className="form-floating mb-4">
-                                        <input type="text" value={data.email} className="form-control" onChange={handleChange} id="Eemail" placeholder="Email" />
+                                    <div className="form-floating mb-4 mb-lg-0">
+                                        <input type="text" value={data.email} className="form-control" name="email" onChange={handleChange} id="Eemail" placeholder="Email" />
                                         <label htmlFor="Eemail">Email</label>
                                         {
                                             errors.email && <small className='text-danger p-2'>{errors.email}</small>
@@ -115,8 +115,8 @@ export default function ModalEditUser({ user }: User){
                                 </div>
 
                                 <div className="col-lg-4">
-                                    <div className="form-floating mb-4">
-                                        <input type="text" value={data.is_admin} className="form-control" onChange={handleChange} id="Eis_admin" placeholder="Acesso" />
+                                    <div className="form-floating">
+                                        <input type="text" value={data.is_admin} className="form-control" name="is_admin" onChange={handleChange} id="Eis_admin" placeholder="Acesso" />
                                         <label htmlFor="Eis_admin">Acesso</label>
                                         {
                                             errors.is_admin && <small className='text-danger'>{errors.is_admin}</small>

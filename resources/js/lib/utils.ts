@@ -7,10 +7,14 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formartDate(value: string){
 
-    const date = new Date(value);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+    const dateObj = new Date(value);
 
-    return day + '/' + month + '/' + year;
+    const date = new Intl.DateTimeFormat('pt-BR', {
+
+        dateStyle: 'medium',
+        timeStyle: 'short'
+
+    }).format(dateObj);
+
+    return date;
 }

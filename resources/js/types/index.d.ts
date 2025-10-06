@@ -23,6 +23,11 @@ export interface User {
     //[key: string]: unknown; // This allows for additional properties...
 }
 
+export interface CategorieProps{
+    id: number;
+    name: string;
+}
+
 export type UserProps = {
 
     id: number;

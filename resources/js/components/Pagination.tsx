@@ -9,7 +9,7 @@ export default function Pagination({ links }: PaginationProps){
 
     return(
 
-        <div className="d-flex gap-2 mt-3 justify-content-end">
+        <div className="">
             {links.map((link, index) => (
                 <Link
                     key={index}

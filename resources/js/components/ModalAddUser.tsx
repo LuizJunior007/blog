@@ -70,7 +70,7 @@ export default function ModalAddUser(){
                             <div className="row">
                                 <div className="col-lg-6">
                                     <div className="form-floating mb-4">
-                                        <input type="text" value={data.name} className="form-control" onChange={handleChange} id="name" placeholder="Nome" />
+                                        <input type="text" value={data.name} autoComplete="off" className="form-control" onChange={handleChange} id="name" placeholder="Nome" />
                                         <label htmlFor="name">Nome</label>
                                         {
                                             errors.name && <small className='text-danger'>{errors.name}</small>
@@ -80,7 +80,7 @@ export default function ModalAddUser(){
 
                                 <div className="col-lg-6">
                                     <div className="form-floating mb-4">
-                                        <input type="text" value={data.lastname} className="form-control" onChange={handleChange} id="lastname" placeholder="Nome" />
+                                        <input type="text" value={data.lastname} autoComplete="off" className="form-control" onChange={handleChange} id="lastname" placeholder="Nome" />
                                         <label htmlFor="lastname">Sobrenome</label>
                                         {
                                             errors.lastname && <small className='text-danger'>{errors.lastname}</small>
@@ -91,8 +91,8 @@ export default function ModalAddUser(){
 
                             <div className="row">
                                 <div className="col-lg-8">
-                                    <div className="form-floating mb-4">
-                                        <input type="text" value={data.email} className="form-control" onChange={handleChange} id="email" placeholder="Email" />
+                                    <div className="form-floating mb-4 mb-lg-0">
+                                        <input type="text" value={data.email} autoComplete="off" className="form-control" onChange={handleChange} id="email" placeholder="Email" />
                                         <label htmlFor="email">Email</label>
                                         {
                                             errors.email && <small className='text-danger p-2'>{errors.email}</small>
@@ -101,8 +101,8 @@ export default function ModalAddUser(){
                                 </div>
 
                                 <div className="col-lg-4">
-                                    <div className="form-floating mb-4">
-                                        <input type="password" value={data.password} className="form-control" onChange={handleChange} id="password" placeholder="Acesso" />
+                                    <div className="form-floating">
+                                        <input type="password" autoComplete="off" value={data.password} className="form-control" onChange={handleChange} id="password" placeholder="Senha" />
                                         <label htmlFor="password">Senha</label>
                                         {
                                             errors.password && <small className='text-danger'>{errors.password}</small>

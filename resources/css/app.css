@@ -1,7 +1,11 @@
 @import url('bootstrap-icons/font/bootstrap-icons');
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap');
 
 body {
     background-color: #f9f9f9;
+    font-family: "Alan sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 .main {
@@ -11,12 +15,41 @@ body {
     min-height: 100vh;
 }
 
+.table{
+    margin: 0;
+}
+
+.table-head{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 4rem;
+}
+
+thead tr{
+    border-top: 1px solid #eaeaea;
+}
+
+th, td{
+    padding: 15px 20px !important;
+    background-color: transparent !important;
+}
+
 .login-form {
     width: 340px;
 }
 
 h1{
     font-size: 2em;
+}
+
+.nav-link.ativo{
+    color: #fff !important;
+}
+
+.sidebar .nav-item .nav-link i{
+    min-width: 30px;
+    margin-right: 10px;
 }
 
 .offcanvas{

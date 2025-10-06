@@ -14,7 +14,6 @@ export default function Users(){
 
     const { users } = usePage< {users: PaginatedResponse<UserProps> } >().props;
     const [user, setUser] = useState();
-
     const { flash }: any = usePage().props;
 
     async function getUser(id: number){
@@ -71,67 +70,78 @@ export default function Users(){
                     </div>
                 </div>
 
-                <div className="table-responsive p-3 border rounded bg-white shadow mt-3">
-                    <table className="table table-striped align-middle">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Sobrenome</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Acesso</th>
-                                <th scope="col">Criado em</th>
-                                <th scope="col">Atualizado em</th>
-                                <th scope="col">Ações</th>
-                            </tr>
-                        </thead>
+                <div className="border bg-white rounded mt-3">
 
-                        <tbody>
-                            {
-                                users.data.length > 0
-                                    ?
-                                users.data.map((u) =>
-                                    <tr key={u.id}>
-                                        <td>{u.id}</td>
-                                        <td>{u.name}</td>
-                                        <td>{u.lastname}</td>
-                                        <td>{u.email}</td>
-                                        <td>
-                                            {
-                                                u.is_admin === 0 
-                                                ?
-                                                <span className="badge rounded-pill text-bg-primary">Usuário</span>
-                                                :
-                                                <span className="badge rounded-pill text-bg-success">Administrador</span>
-                                            }
-                                        </td>
-                                        <td>{formartDate(u.created_at)}</td>
-                                        <td>
-                                            {
-                                                u.updated_at === null ? '' : formartDate(u.updated_at)
-                                            }
-                                        </td>
-                                        <td>
-                                            <button type="button" onClick={() => getUser(u.id)} className="btn" title="Editar" data-bs-target="#modalEditUser" data-bs-toggle="modal">
-                                                <i className="bi bi-pen text-primary"></i>
-                                            </button>
+                    <div className="table-head p-3">
+                        <div>
+                            <input type="search" className="form-control" placeholder="Pesquisar" />
+                        </div>
+                    </div>
 
-                                            <button type="button" onClick={() => getUser(u.id)} className="btn" title="Remover" data-bs-target="#modalRemoveUser" data-bs-toggle="modal">
-                                                <i className="bi bi-trash text-danger"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )
-                                    :
+                    <div className="table-responsive">
+                        <table className="table align-middle">
+                            <thead>
                                 <tr>
-                                    <td colSpan={8}>Nenhum usuário foi encontrado</td>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Sobrenome</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Acesso</th>
+                                    <th scope="col">Criado em</th>
+                                    <th scope="col">Atualizado em</th>
+                                    <th scope="col">Ações</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
 
-                <Pagination links={ users.links } />
+                            <tbody>
+                                {
+                                    users.data.length > 0
+                                        ?
+                                    users.data.map((u) =>
+                                        <tr key={u.id}>
+                                            <td>{u.id}</td>
+                                            <td>{u.name}</td>
+                                            <td>{u.lastname}</td>
+                                            <td>{u.email}</td>
+                                            <td>
+                                                {
+                                                    u.is_admin === 0 
+                                                    ?
+                                                    <span className="badge rounded-pill text-bg-primary">Usuário</span>
+                                                    :
+                                                    <span className="badge rounded-pill text-bg-success">Administrador</span>
+                                                }
+                                            </td>
+                                            <td>{formartDate(u.created_at)}</td>
+                                            <td>
+                                                {
+                                                    u.updated_at === null ? '' : formartDate(u.updated_at)
+                                                }
+                                            </td>
+                                            <td>
+                                                <button type="button" onClick={() => getUser(u.id)} className="btn" title="Editar" data-bs-target="#modalEditUser" data-bs-toggle="modal">
+                                                    <i className="bi bi-pen text-primary"></i>
+                                                </button>
+
+                                                <button type="button" onClick={() => getUser(u.id)} className="btn" title="Remover" data-bs-target="#modalRemoveUser" data-bs-toggle="modal">
+                                                    <i className="bi bi-trash text-danger"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                        :
+                                    <tr>
+                                        <td colSpan={8}>Nenhum usuário foi encontrado</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div className="table-head p-3">
+                        <Pagination links={ users.links } />
+                    </div>
+                </div>
             </section>
 
             {

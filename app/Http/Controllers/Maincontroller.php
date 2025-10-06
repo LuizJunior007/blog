@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -154,8 +155,95 @@ class Maincontroller extends Controller
 
     public function categorias(){
 
-        return Inertia::render('Categories');
+        $categories = Categorie::orderBy('id', 'desc')->paginate(10);
 
+        return Inertia::render('Categories', [
+            'categories' => $categories
+        ]);
+
+    }
+
+    public function addCategorie(Request $request){
+
+        $request->validate([
+            'name' => 'required|min:3'
+        ], [
+            'name.required' => 'Preencha este campo',
+            'name.min' => 'Mínimo 3 caracteres'
+        ]);
+
+        $categorie = Categorie::create([
+            'name' => $request->name
+        ]);
+
+        if($categorie){
+
+            return redirect()->back()->with('success', 'Adicionado com sucesso');
+        } else{
+
+            return redirect()->back()->with('error', 'Erro ao tentar adicionar');            
+        }
+    }
+
+    public function getCategorie($id){
+
+        $categorie = Categorie::findOrFail($id);
+
+        if($categorie){
+
+            return response($categorie);
+
+        } else{
+
+            return response()->json([
+                'categorie' => 'error'
+            ], 404);
+        }
+    }
+
+    public function updateCategorie(Request $request){
+
+        $request->validate([
+            'name' => 'required|min:3'
+        ], [
+            'name.required' => 'Preencha este campo',
+            'name.min' => 'Mínimo 3 caracteres'
+        ]);
+
+        $categorie = Categorie::findOrFail($request->id);
+
+        $updated = $categorie->update([
+            'name' => $request->name
+        ]);
+
+        if($updated){
+
+            return redirect()->back()->with('success', 'Salvo com sucesso');
+        } else{
+
+            return redirect()->back()->with('error', 'Erro ao tentar salvar');
+        }
+
+    }
+
+    public function deleteCategorie(Request $request){
+
+        $categorie = Categorie::findOrFail($request->id);
+
+        $deleted = $categorie->delete();
+        
+        if($deleted){
+
+            return redirect()->back()->with('success', 'Removido com sucesso');      
+        } else{
+
+            return redirect()->back()->with('error', 'Erro ao tentar remover');
+        }
+    }
+
+    public function posts(){
+
+        return Inertia::render('Posts', []);
     }
 
     public function logout(Request $request){

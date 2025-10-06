@@ -32,4 +32,11 @@ Route::get('/usuarios', [Maincontroller::class, 'users'])->name('usuarios')->mid
 Route::get('/user/{id}', [Maincontroller::class, 'getUser'])->name('getUser');
 Route::put('/user/{id}', [Maincontroller::class, 'editUser'])->name('editUser');
 Route::delete('/user/{id}', [ Maincontroller::class, 'deleteUser' ])->name('deleteUser');
+
 Route::get('/categorias', [ Maincontroller::class, 'categorias' ])->name('categorias')->middleware(Auth::class);
+Route::post('/categorie', [ Maincontroller::class, 'addCategorie' ])->name('addCategorie');
+Route::get('/categorie/{id}', [ Maincontroller::class, 'getCategorie' ])->name('getCategorie');
+Route::put('/categorie/{id}', [ Maincontroller::class, 'updateCategorie' ])->name('updateCategorie');
+Route::delete('/categorie/{id}', [ Maincontroller::class, 'deleteCategorie' ])->name('deleteCategorie');
+
+Route::get('/posts', [ Maincontroller::class, 'posts' ])->name('posts')->middleware(Auth::class);
