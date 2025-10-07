@@ -40,3 +40,4 @@ Route::put('/categorie/{id}', [ Maincontroller::class, 'updateCategorie' ])->nam
 Route::delete('/categorie/{id}', [ Maincontroller::class, 'deleteCategorie' ])->name('deleteCategorie');
 
 Route::get('/posts', [ Maincontroller::class, 'posts' ])->name('posts')->middleware(Auth::class);
+Route::post('/post', [ Maincontroller::class, 'newPost' ])->name('newPost');

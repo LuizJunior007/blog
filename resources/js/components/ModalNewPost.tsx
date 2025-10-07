@@ -3,7 +3,7 @@ import Editor from "./Editor";
 
 export default function ModalNewPost(){
 
-    const { data, setData, errors } = useForm({
+    const { data, setData, errors, clearErrors, post, reset } = useForm({
         title: '',
         category: '',
         content: ''
@@ -12,6 +12,28 @@ export default function ModalNewPost(){
     const handleChange = (e: any) => {
 
         setData(e.target.name, e.target.value);
+
+    }
+
+    const handleClear = () => {
+
+        clearErrors();
+        reset();
+        setData({
+            title: '',
+            category: '',
+            content: ''
+        });
+    }
+
+    const handleSubmit = () => {
+
+        post('/post', {
+            onSuccess: () => {
+
+                console.log('OK');
+            }
+        })
 
     }
 
@@ -63,8 +85,8 @@ export default function ModalNewPost(){
                     </div>
 
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="btnClose">Fechar</button>
-                        <button type="button" className="btn btn-primary">Publicar</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="btnClose" onClick={handleClear}>Fechar</button>
+                        <button type="button" className="btn btn-primary" onClick={handleSubmit}>Publicar</button>
                     </div>
                 </div>
             </div>

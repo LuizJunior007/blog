@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "@ckeditor/ckeditor5-react": "^11.0.0",
+        "@ckeditor/ckeditor5-upload": "^47.0.0",
         "@inertiajs/react": "^2.0.0",
         "@tailwindcss/vite": "^4.1.11",
         "@tiptap/react": "^3.6.5",

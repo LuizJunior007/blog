@@ -7,8 +7,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class Maincontroller extends Controller
 {
@@ -244,6 +246,28 @@ class Maincontroller extends Controller
     public function posts(){
 
         return Inertia::render('Posts', []);
+    }
+
+    public function newPost(Request $request){
+
+        $content = $request->input('content');
+
+        // Procura imagens em Base64
+        preg_match_all('/<img[^>]+src="data:image\/([^;]+);base64,([^"]+)"/', $content, $matches, PREG_SET_ORDER);
+
+        foreach ($matches as $match) {
+            $extension = $match[1]; // ex: png
+            $data = base64_decode($match[2]);
+            $filename = Str::random(10) . '.' . $extension;
+
+            Storage::put("public/uploads/$filename", $data);
+
+            // Substitui no conteúdo
+            $url = asset("storage/uploads/$filename");
+            $content = str_replace($match[0], '<img src="' . $url . '"', $content);
+        }
+
+        return $content;
     }
 
     public function logout(Request $request){
